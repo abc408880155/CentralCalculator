@@ -19,6 +19,8 @@ public class Reconstitution extends JFrame {
     JComboBox comboBoxVolume;
     JComboBox comboBoxMass;
     JComboBox comboBoxDesire;
+    JButton buttonCalculate;
+    JButton buttonReset;
 
     String[] volume = {"µL","ml"};
     String[] mass = {"µg","ng","mg"};
@@ -27,7 +29,13 @@ public class Reconstitution extends JFrame {
     public Reconstitution() {
         super("复溶计算器");
         Container c = getContentPane();
-        setLayout(new FlowLayout());
+        c.setLayout(new BorderLayout());
+        JLayeredPane paneUp = getLayeredPane();
+        paneUp.setLayout(new FlowLayout());
+        JLayeredPane paneCenter = getLayeredPane();
+        paneCenter.setLayout(new FlowLayout());
+        JLayeredPane paneDown = getLayeredPane();
+        paneDown.setLayout(new FlowLayout());
 
         labelVolume = new JLabel("体积(加到每管)");
         labelMass = new JLabel("质量(每管)");
@@ -41,18 +49,25 @@ public class Reconstitution extends JFrame {
         comboBoxMass = new JComboBox(mass);
         comboBoxDesire = new JComboBox(Desire);
 
+        buttonCalculate = new JButton("计算");
+        buttonReset = new JButton("重置");
+
         //将各个组件添加到面板
-        c.add(labelVolume);
-        c.add(labelMass);
-        c.add(labelDesire);
-        c.add(textVolume);
-        c.add(comboBoxVolume);
-        c.add(textMass);
-        c.add(comboBoxMass);
-        c.add(textDesire);
-        c.add(comboBoxDesire);
+        paneUp.add(labelVolume);
+        paneUp.add(labelMass);
+        paneUp.add(labelDesire);
+        paneCenter.add(textVolume);
+        paneCenter.add(comboBoxVolume);
+        paneCenter.add(textMass);
+        paneCenter.add(comboBoxMass);
+        paneCenter.add(textDesire);
+        paneCenter.add(comboBoxDesire);
+        paneDown.add(buttonCalculate);
+        paneDown.add(buttonReset);
 
-
+        c.add(paneUp, SwingConstants.NORTH);
+        c.add(paneCenter,SwingConstants.CENTER);
+        c.add(paneDown,SwingConstants.SOUTH);
     }
 
     //初试化窗体的init方法
